@@ -56,13 +56,12 @@ override_dh_install:
 	cd $D && find . -name '*.jar' | xargs rm
 	cd $D && find . -name '*.smp' | xargs rm
 	cd $D/opt/tivoli/tsm/client/ && rm -rf \
-		ba/bin/dsmcad ba/bin/rc.dsmcad ba/bin/dsmcad.service \
-		api/properties/ ba/properties/ \
+		api/properties/ \
 		api/swidtag/ ba/swidtag/ \
 		ba/bin/dsmj ba/bin/favicon.ico ba/bin/images/ \
 		ba/bin/configFile ba/bin/commonFunctions ba/bin/*.sh \
 		ba/bin/nasdcm.lic api/bin64/sample/ ba/client_message.chg
-	cd $D && rm -rf usr/bin/dsmcad etc/init.d/dsmcad usr/bin/dsmj \
+	cd $D && rm -rf usr/bin/dsmj \
 		opt/tivoli/tsm/license/
 
 	cp dsm.sys $D/opt/tivoli/tsm/client/ba/bin/dsm.sys.smp
@@ -87,8 +86,8 @@ endif
 
 	ln -sf ../../ba/bin/dsmcert $D/opt/tivoli/tsm/client/api/bin64/
 
-override_dh_installsystemd:
-	dh_installsystemd --name=dsm
+#override_dh_installsystemd:
+#	dh_installsystemd --name=dsm
 
 override_dh_strip:
 	# ICC fails the self-test if modified!
